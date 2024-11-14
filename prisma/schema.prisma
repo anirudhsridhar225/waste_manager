@@ -1,0 +1,17 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model waste {
+  id             BigInt @id @default(autoincrement())
+  waste_name     String
+  waste_type     String
+  waste_location String
+  waste_quantity BigInt
+}
