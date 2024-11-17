@@ -9,9 +9,9 @@ datasource db {
 }
 
 model waste {
-  id             BigInt @id @default(autoincrement())
+  id             Int @id @default(autoincrement())
   waste_name     String
   waste_type     String
   waste_location String
-  waste_quantity BigInt
+  waste_quantity Int
 }

@@ -9,19 +9,19 @@ import { Input } from "@/components/ui/input";
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 
 interface WasteProps {
-  wasteName: string;
-  wasteType: string;
-  wasteLocation: string;
-  wasteQuantity: number;
+  waste_name: string;
+  waste_type: string;
+  waste_location: string;
+  waste_quantity: number;
 }
 
 const formSchema = z.object({
-  wasteName: z.string().min(1, {
+  waste_name: z.string().min(1, {
     message: "Waste name is required",
   }),
-  wasteType: z.string().min(1),
-  wasteLocation: z.string().min(1),
-  wasteQuantity: z.number().positive().int().min(1),
+  waste_type: z.string().min(1),
+  waste_location: z.string().min(1),
+  waste_quantity: z.number().positive().int().min(1),
 })
 
 async function saveWaste(waste: WasteProps) {
@@ -42,10 +42,10 @@ export default function Home() {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      wasteName: "John Doe",
-      wasteLocation: "Waste Dump A",
-      wasteType: "Waste Type B",
-      wasteQuantity: 1,
+      waste_name: "John Doe",
+      waste_location: "Waste Dump A",
+      waste_type: "Waste Type B",
+      waste_quantity: 1,
     }
   })
 
@@ -60,7 +60,7 @@ export default function Home() {
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 border border-white/50 p-10 rounded-xl w-1/2">
           <FormField
             control={form.control}
-            name="wasteName"
+            name="waste_name"
             render={({ field }) =>(
                 <FormItem>
                   <FormLabel>Waste Name</FormLabel>
@@ -76,7 +76,7 @@ export default function Home() {
           ></FormField>
           <FormField
               control={form.control}
-              name="wasteType"
+              name="waste_type"
               render={({ field }) =>(
                   <FormItem>
                     <FormLabel>Waste Type</FormLabel>
@@ -92,7 +92,7 @@ export default function Home() {
           ></FormField>
           <FormField
               control={form.control}
-              name="wasteLocation"
+              name="waste_location"
               render={({ field }) =>(
                   <FormItem>
                     <FormLabel>Waste Location</FormLabel>
@@ -108,7 +108,7 @@ export default function Home() {
           ></FormField>
           <FormField
               control={form.control}
-              name="wasteQuantity"
+              name="waste_quantity"
               render={({ field }) =>(
                   <FormItem>
                     <FormLabel>Waste Quantity</FormLabel>
