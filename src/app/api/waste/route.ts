@@ -10,3 +10,8 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json(savedWaste);
 }
+
+export async function GET(response: NextResponse) {
+    const wasteData = await prisma.waste.findMany();
+    return NextResponse.json(wasteData);
+}
