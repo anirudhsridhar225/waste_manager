@@ -33,7 +33,7 @@ const formSchema = z.object({
   waste_type: z.string().min(1),
   waste_location: z.string().min(1),
   waste_quantity: z.number().positive().int().min(1),
-}) 
+})
 
 const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#8884d8', '#82ca9d'];
 
@@ -117,8 +117,8 @@ export default function Home() {
       <div className="max-w-6xl mx-auto">
         <div className="flex justify-between items-center mb-8">
           <h1 className="text-3xl font-bold">Waste Management Dashboard</h1>
-          <Button 
-            onClick={() => setShowForm(true)} 
+          <Button
+            onClick={() => setShowForm(true)}
             className="border border-white flex items-center gap-2"
           >
             <Plus size={16} />
@@ -136,7 +136,7 @@ export default function Home() {
                 <BarChart data={analytics}>
                   <XAxis dataKey="location" stroke="#fff" />
                   <YAxis stroke="#fff" />
-                  <Tooltip 
+                  <Tooltip
                     contentStyle={{ backgroundColor: '#000', border: '1px solid #fff' }}
                     labelStyle={{ color: '#fff' }}
                   />
@@ -160,13 +160,13 @@ export default function Home() {
                     cx="50%"
                     cy="50%"
                     outerRadius={80}
-                    label={({location, percentage}) => `${location}: ${percentage}%`}
+                    label={({ location, percentage }) => `${location}: ${percentage}%`}
                   >
                     {analytics.map((entry, index) => (
                       <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                     ))}
                   </Pie>
-                  <Tooltip 
+                  <Tooltip
                     contentStyle={{ backgroundColor: '#fff', border: '1px solid #fff' }}
                     labelStyle={{ color: '#fff' }}
                   />
@@ -222,15 +222,15 @@ export default function Home() {
             <Card className="bg-black border border-white/50 p-8 rounded-xl w-full max-w-2xl">
               <div className="flex justify-between items-center mb-6">
                 <h2 className="text-2xl font-bold text-white">Add New Waste Entry</h2>
-                <Button 
+                <Button
                   onClick={() => setShowForm(false)}
-                  variant="ghost" 
+                  variant="ghost"
                   className="hover:bg-white/10"
                 >
                   ✕
                 </Button>
               </div>
-              
+
               <Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
                   <FormField
@@ -298,19 +298,19 @@ export default function Home() {
                     )}
                   />
                   <div className="flex justify-end gap-4">
-                    <Button 
-                      type="button" 
+                    <Button
+                      type="submit"
+                      className="border border-white"
+                    >
+                      Submit
+                    </Button>
+                    <Button
+                      type="button"
                       onClick={() => setShowForm(false)}
                       variant="outline"
                       className="border-white"
                     >
                       Cancel
-                    </Button>
-                    <Button 
-                      type="submit" 
-                      className="border border-white"
-                    >
-                      Submit
                     </Button>
                   </div>
                 </form>
