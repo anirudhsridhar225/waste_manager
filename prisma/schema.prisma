@@ -3,13 +3,14 @@ generator client {
 }
 
 datasource db {
-  provider  = "postgresql"
-  url       = env("DATABASE_URL")
-  directUrl = env("DIRECT_URL")
+  provider     = "postgresql"
+  url          = env("DATABASE_URL")
+  directUrl    = env("DIRECT_URL")
+  relationMode = "prisma"
 }
 
 model waste {
-  id             Int @id @default(autoincrement())
+  id             Int    @id @default(autoincrement())
   waste_name     String
   waste_type     String
   waste_location String
