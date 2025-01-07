@@ -1,15 +1,15 @@
 "use client";
-import { useEffect, useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+import { Bar, BarChart, Cell, Legend, Pie, PieChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 import { z } from "zod";
-import { BarChart, Bar, XAxis, YAxis, Tooltip, Legend, ResponsiveContainer, PieChart, Pie, Cell } from "recharts";
 
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Card } from "@/components/ui/card";
+import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Plus } from "lucide-react";
 
 interface WasteProps {
@@ -32,7 +32,7 @@ const formSchema = z.object({
   }),
   waste_type: z.string().min(1),
   waste_location: z.string().min(1),
-  waste_quantity: z.number().positive().int().min(1),
+  waste_quantity: z.coerce.number().positive().int().min(1),
 })
 
 const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#8884d8', '#82ca9d'];
@@ -284,11 +284,20 @@ export default function Home() {
                   <FormField
                     control={form.control}
                     name="waste_quantity"
-                    render={({ field }) => (
+                    render={({ field: { onChange, ...field } }) => (
                       <FormItem>
                         <FormLabel className="text-white">Waste Quantity</FormLabel>
                         <FormControl>
-                          <Input type="number" placeholder="100" className="text-white" {...field} onChange={(e) => field.onChange(parseInt(e.target.value))} />
+                          <Input 
+                            type="number" 
+                            placeholder="100" 
+                            className="text-white" 
+                            onChange={(e) => {
+                              const value = e.target.value ? parseInt(e.target.value) : '';
+                              onChange(value);
+                            }}
+                            {...field}
+                          />
                         </FormControl>
                         <FormDescription>
                           Please enter the quantity of waste being dumped.

@@ -1,6 +1,6 @@
 import { prisma } from "@/lib/prisma";
-import { NextRequest, NextResponse } from "next/server";
 import type { waste } from "@prisma/client";
+import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(request: NextRequest) {
     const reqdata = await request.json() as waste;
@@ -13,5 +13,6 @@ export async function POST(request: NextRequest) {
 
 export async function GET(request: NextRequest) {
     const wasteData = await prisma.waste.findMany();
+    console.log(request);
     return NextResponse.json(wasteData);
 }
